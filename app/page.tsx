@@ -51,7 +51,7 @@ const categoryDescriptions: Record<string, string> = {
   haircare: "Restorative scalp therapies and nourishing hair spa treatments to revive and strengthen every strand.",
   hairchemical: "High-end coloring, smoothing, and keratin treatments tailored to create your signature style.",
   clinical: "Dermatologically-inspired aesthetic therapies for targeted skin concerns and cellular renewal.",
-  bridal: "Luxe bridal makeup and occasion styling to ensure you look breathtaking on your special day."
+  bridal: "Luxe occasion makeup and event styling packages to ensure you look breathtaking on your most special days."
 };
 
 // SVG category icons mapped to their IDs
@@ -351,7 +351,7 @@ export default function HomePage() {
         {/* Luxury Background Image */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1600"
+            src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&q=80&w=1600"
             alt="Luxury Salon Interior"
             className="w-full h-full object-cover scale-105 animate-[subtle-zoom_20s_infinite_alternate] brightness-[0.7] contrast-[1.05]"
           />
@@ -653,7 +653,7 @@ export default function HomePage() {
               <div className="absolute -inset-4 border border-accent/30 rounded-2xl translate-x-2 translate-y-2 pointer-events-none" />
               <div className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&q=80&w=800"
+                  src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?auto=format&fit=crop&q=80&w=800"
                   alt="Stylist Edge Artistry"
                   className="w-full h-full object-cover"
                 />
@@ -664,19 +664,19 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-6 lg:pl-6">
               <span className="text-accent text-xs font-semibold uppercase tracking-widest block">The Edge Story</span>
               <h2 className="font-serif-luxury text-3xl md:text-5xl font-normal text-primary leading-tight">
-                Where Beauty Meets Confidence
+                Where Style Meets Confidence
               </h2>
               <div className="w-20 h-[1.5px] bg-accent"></div>
               
               <div className="space-y-4 text-text-muted font-light leading-relaxed text-sm md:text-base">
                 <p>
-                  At <strong className="font-medium text-primary">{db.brand.name}</strong>, we believe that style is a language that speaks of your inner strength and poise. Nestled in the heart of Dharmapuri, our salon offers a sanctuary of soft luxury, pristine aesthetics, and masterfully crafted personal care services.
+                  At <strong className="font-medium text-primary">{db.brand.name}</strong>, we believe that style is a language that speaks of your identity and confidence. Nestled in the heart of Dharmapuri, our unisex salon offers a sanctuary of refined luxury, pristine aesthetics, and masterfully crafted personal care services for everyone.
                 </p>
                 <p>
-                  Curated and led by <strong className="font-medium text-primary">{db.brand.contact.person}</strong>, the brand is built upon an unwavering standard of elegance. Whether you visit us for our precision threading, skin-refreshing cleanups, specialized chemical hair designs, or signature bridal aesthetics, you enter a space dedicated entirely to your confidence and comfort.
+                  Curated and led by <strong className="font-medium text-primary">{db.brand.contact.person}</strong>, the brand is built upon an unwavering standard of excellence. Whether you visit us for precision threading, skin-refreshing cleanups, specialized hair treatments, or occasion styling, you enter a space dedicated entirely to your comfort and self-expression.
                 </p>
                 <p className="italic font-serif-luxury text-primary border-l-2 border-accent pl-4 text-base my-6">
-                  "We do not merely change hairstyles or perform skincare; we elevate your innate self-assurance, designing experiences that let your unique beauty radiate with absolute conviction."
+                  "We do not merely change hairstyles or perform skincare; we elevate your innate self-assurance, designing experiences that let your unique style radiate with absolute conviction."
                 </p>
                 <p>
                   Our services are entirely personalized. We merge premium salon products, contemporary artistic technique, and deep-care clinical treatments to ensure each visit feels restorative, luxurious, and uniquely yours.
@@ -777,7 +777,7 @@ export default function HomePage() {
               </h3>
             </div>
             <p className="text-xs text-white/70 max-w-xs font-light tracking-wide leading-relaxed">
-              Premium feminine luxury and personalized beauty curation designed to make you feel beautiful, poised, and confident.
+              Premium unisex luxury and personalized styling curation designed to make everyone feel confident, refreshed, and uniquely themselves.
             </p>
           </div>
 
