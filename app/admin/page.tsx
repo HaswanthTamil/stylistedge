@@ -277,101 +277,129 @@ export default function AdminPage() {
     }
   };
 
-  const renderPriceInputs = (service: Service) => {
-    switch (service.priceType) {
-      case 'fixed':
-        return (
+const renderPriceInputs = (service: Service) => {
+  const textStyle = { color: 'black' };
+  const inputStyle = { color: 'black' };
+
+  switch (service.priceType) {
+    case 'fixed':
+      return (
+        <label className="fieldRow" style={textStyle}>
+          Price:
+          <input
+            style={inputStyle}
+            type="number"
+            value={typeof service.price === 'number' ? service.price : 0}
+            min={0}
+            onChange={(event) =>
+              updateService(service.serviceId ?? '', {
+                price: Number(event.target.value)
+              })
+            }
+          />
+        </label>
+      );
+
+    case 'range': {
+      const [start = 0, end = 0] = Array.isArray(service.price)
+        ? service.price
+        : [0, 0];
+
+      return (
+        <div style={textStyle}>
           <label className="fieldRow">
-            Price:
+            From:
             <input
+              style={inputStyle}
               type="number"
-              value={typeof service.price === 'number' ? service.price : 0}
+              value={start}
               min={0}
-              onChange={(event) => updateService(service.serviceId ?? '', { price: Number(event.target.value) })}
+              onChange={(event) =>
+                updateService(service.serviceId ?? '', {
+                  price: [Number(event.target.value), end]
+                })
+              }
             />
           </label>
-        );
-      case 'range': {
-        const [start = 0, end = 0] = Array.isArray(service.price) ? service.price : [0, 0];
-        return (
-          <>
-            <label className="fieldRow">
-              From:
-              <input
-                type="number"
-                value={start}
-                min={0}
-                onChange={(event) =>
-                  updateService(service.serviceId ?? '', {
-                    price: [Number(event.target.value), end]
-                  })
-                }
-              />
-            </label>
-            <label className="fieldRow">
-              To:
-              <input
-                type="number"
-                value={end}
-                min={0}
-                onChange={(event) =>
-                  updateService(service.serviceId ?? '', {
-                    price: [start, Number(event.target.value)]
-                  })
-                }
-              />
-            </label>
-          </>
-        );
-      }
-      case 'gender': {
-        const genderPrice = typeof service.price === 'object' && !Array.isArray(service.price) && service.price !== null
+
+          <label className="fieldRow">
+            To:
+            <input
+              style={inputStyle}
+              type="number"
+              value={end}
+              min={0}
+              onChange={(event) =>
+                updateService(service.serviceId ?? '', {
+                  price: [start, Number(event.target.value)]
+                })
+              }
+            />
+          </label>
+        </div>
+      );
+    }
+
+    case 'gender': {
+      const genderPrice =
+        typeof service.price === 'object' &&
+        !Array.isArray(service.price) &&
+        service.price !== null
           ? service.price
           : { male: 0, female: 0 };
-        return (
-          <>
-            <label className="fieldRow">
-              Male:
-              <input
-                type="number"
-                value={genderPrice.male}
-                min={0}
-                onChange={(event) =>
-                  updateService(service.serviceId ?? '', {
-                    price: {
-                      male: Number(event.target.value),
-                      female: genderPrice.female
-                    }
-                  })
-                }
-              />
-            </label>
-            <label className="fieldRow">
-              Female:
-              <input
-                type="number"
-                value={genderPrice.female}
-                min={0}
-                onChange={(event) =>
-                  updateService(service.serviceId ?? '', {
-                    price: {
-                      male: genderPrice.male,
-                      female: Number(event.target.value)
-                    }
-                  })
-                }
-              />
-            </label>
-          </>
-        );
-      }
-      case 'custom':
-        return <div className="fieldRow">Custom price - set service as custom pricing.</div>;
-      default:
-        return null;
-    }
-  };
 
+      return (
+        <div style={textStyle}>
+          <label className="fieldRow">
+            Male:
+            <input
+              style={inputStyle}
+              type="number"
+              value={genderPrice.male}
+              min={0}
+              onChange={(event) =>
+                updateService(service.serviceId ?? '', {
+                  price: {
+                    male: Number(event.target.value),
+                    female: genderPrice.female
+                  }
+                })
+              }
+            />
+          </label>
+
+          <label className="fieldRow">
+            Female:
+            <input
+              style={inputStyle}
+              type="number"
+              value={genderPrice.female}
+              min={0}
+              onChange={(event) =>
+                updateService(service.serviceId ?? '', {
+                  price: {
+                    male: genderPrice.male,
+                    female: Number(event.target.value)
+                  }
+                })
+              }
+            />
+          </label>
+        </div>
+      );
+    }
+
+    case 'custom':
+      return (
+        <div className="fieldRow" style={textStyle}>
+          Custom price - set service as custom pricing.
+        </div>
+      );
+
+    default:
+      return null;
+  }
+};
   return (
     <div className="adminShell">
       <div className="sidebar">
@@ -649,10 +677,15 @@ export default function AdminPage() {
           margin-bottom: 12px;
         }
 
+        .fieldRow,
+        .priceBlock label,
+        .serviceBlock label {
+          color: #000000;
+        }
+
         .fieldRow label {
           font-size: 0.90rem;
           font-weight: 600;
-          color: #000000;
         }
 
         .fieldRow input,
