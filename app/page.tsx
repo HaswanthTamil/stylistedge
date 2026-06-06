@@ -329,20 +329,7 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Quick call CTA on mobile */}
-          <a
-            href={`tel:${db.brand.contact.phone}`}
-            className={`md:hidden p-2.5 rounded-full border transition-all duration-500 ${
-              scrolled
-                ? 'border-accent bg-primary/5 text-primary hover:bg-accent hover:text-white'
-                : 'border-white/20 bg-white/95 text-primary shadow-sm'
-            }`}
-            title="Call Us"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.387a12.035 12.035 0 01-7.108-7.108c-.145-.44.02-.927.396-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-            </svg>
-          </a>
+
         </div>
       </nav>
 
