@@ -698,8 +698,9 @@ const renderPriceInputs = (service: Service) => {
                   <tr style={{ borderBottom: '1px solid #eee' }}>
                     <th style={{ padding: '8px' }}>Date</th>
                     <th style={{ padding: '8px' }}>Time</th>
+                    <th style={{ padding: '8px' }}>Name</th>
                     <th style={{ padding: '8px' }}>Phone</th>
-                    <th style={{ padding: '8px' }}>Service ID</th>
+                    <th style={{ padding: '8px' }}>Gender</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -707,8 +708,9 @@ const renderPriceInputs = (service: Service) => {
                     <tr key={booking.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
                       <td style={{ padding: '8px' }}>{booking.date}</td>
                       <td style={{ padding: '8px' }}>{booking.time}</td>
+                      <td style={{ padding: '8px' }}>{booking.name}</td>
                       <td style={{ padding: '8px' }}>{booking.phone}</td>
-                      <td style={{ padding: '8px' }}>{booking.service_id}</td>
+                      <td style={{ padding: '8px', textTransform: 'capitalize' }}>{booking.gender}</td>
                     </tr>
                   ))}
                 </tbody>
