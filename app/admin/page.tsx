@@ -215,7 +215,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (!selectedCategoryId) {
-      setSelectedCategoryId('brand');
+      setSelectedCategoryId('timings');
     }
   }, [selectedCategoryId]);
 
@@ -573,7 +573,7 @@ const renderPriceInputs = (service: Service) => {
           <div className="w-8 h-8 rounded-full overflow-hidden bg-white flex items-center justify-center">
             <img src="/logo.png" alt="Stylist Edge Logo" className="w-full h-full object-cover" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
-          <div className="font-serif-luxury text-sm font-semibold tracking-wider text-white">
+          <div className="font-serif-luxury text-sm font-semibold tracking-wider text-black">
             Admin Panel
           </div>
         </div>
@@ -584,12 +584,6 @@ const renderPriceInputs = (service: Service) => {
           Logout
         </button>
         <div className="categoryList">
-          <div
-            className={`categoryItem ${selectedCategoryId === 'brand' ? 'selected' : ''}`}
-            onClick={() => selectCategory('brand')}
-          >
-            <div className="categoryLabel">Brand Settings</div>
-          </div>
           <div
             className={`categoryItem ${selectedCategoryId === 'timings' ? 'selected' : ''}`}
             onClick={() => selectCategory('timings')}
@@ -608,36 +602,13 @@ const renderPriceInputs = (service: Service) => {
           >
             <div className="categoryLabel">Analytics</div>
           </div>
+          <div
+            className={`categoryItem ${selectedCategoryId === 'website' ? 'selected' : ''}`}
+            onClick={() => selectCategory('website')}
+          >
+            <div className="categoryLabel">Edit Website</div>
+          </div>
         </div>
-        <div className="sectionHeader" style={{ marginTop: '16px' }}>Categories</div>
-        <div className="categoryList">
-          {database.categories.map((category) => {
-            const isSelected = category.id === selectedCategoryId;
-            return (
-              <div
-                key={category.id}
-                className={`categoryItem ${isSelected ? 'selected' : ''}`}
-                onClick={() => selectCategory(category.id)}
-              >
-                <div className="categoryLabel">{category.title || 'Untitled Category'}</div>
-                <div className="categoryControls">
-                  <button type="button" onClick={(event) => { event.stopPropagation(); moveCategory(category.id, -1); }}>
-                    ↑
-                  </button>
-                  <button type="button" onClick={(event) => { event.stopPropagation(); moveCategory(category.id, 1); }}>
-                    ↓
-                  </button>
-                  <button type="button" onClick={(event) => { event.stopPropagation(); deleteCategory(category.id); }}>
-                    ✕
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <button className="primaryButton" type="button" onClick={addCategory}>
-          + Add Category
-        </button>
       </div>
 
       <div className="mainPanel">
@@ -648,12 +619,39 @@ const renderPriceInputs = (service: Service) => {
           </div>
         )}
         <div className="topHeader">
-          <div className="headerTitle">
-            {selectedCategoryId === 'brand' && '🏪 Brand Settings'}
-            {selectedCategoryId === 'timings' && '⏰ Store Timings'}
-            {selectedCategoryId === 'bookings' && '📅 Customer Bookings'}
-            {selectedCategoryId === 'analytics' && '📈 Analytics'}
-            {!['brand', 'timings', 'bookings', 'analytics'].includes(selectedCategoryId || '') && `📁 ${selectedCategory?.title || 'Category'}`}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            {!['website', 'brand', 'timings', 'bookings', 'analytics'].includes(selectedCategoryId || '') && (
+              <button
+                type="button"
+                onClick={() => selectCategory('website')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#2563eb',
+                  cursor: 'pointer',
+                  fontSize: '1.5rem',
+                  padding: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '8px',
+                  transition: 'background 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#eff6ff'}
+                onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
+                title="Go back"
+              >
+                ←
+              </button>
+            )}
+            <div className="headerTitle">
+              {selectedCategoryId === 'website' && '🌐 Edit Website'}
+              {selectedCategoryId === 'brand' && '🏪 Brand Settings'}
+              {selectedCategoryId === 'timings' && '⏰ Store Timings'}
+              {selectedCategoryId === 'bookings' && '📅 Customer Bookings'}
+              {selectedCategoryId === 'analytics' && '📈 Analytics'}
+              {!['website', 'brand', 'timings', 'bookings', 'analytics'].includes(selectedCategoryId || '') && `📁 ${selectedCategory?.title || 'Category'}`}
+            </div>
           </div>
           <button
             className="saveButton"
@@ -665,57 +663,91 @@ const renderPriceInputs = (service: Service) => {
           </button>
         </div>
 
-        {selectedCategoryId === 'brand' && (
-          <div className="sectionBlock">
-            <div className="sectionHeader">Brand</div>
-            <div className="fieldRow">
-              <label>Hero Image</label>
-              <ImageUploader
-                value={database.brand.heroImage || ''}
-                onChange={(url) => updateBrandField('heroImage', url)}
-              />
+        {selectedCategoryId === 'website' && (
+          <>
+            <div className="sectionBlock">
+              <div className="sectionHeader">Brand Settings</div>
+              <div className="fieldRow">
+                <label>Hero Image</label>
+                <ImageUploader
+                  value={database.brand.heroImage || ''}
+                  onChange={(url) => updateBrandField('heroImage', url)}
+                />
+              </div>
+              <div className="fieldRow">
+                <label>Name</label>
+                <input
+                  type="text"
+                  value={database.brand.name}
+                  onChange={(event) => updateBrandField('name', event.target.value)}
+                />
+              </div>
+              <div className="fieldRow">
+                <label>Tagline</label>
+                <input
+                  type="text"
+                  value={database.brand.tagline}
+                  onChange={(event) => updateBrandField('tagline', event.target.value)}
+                />
+              </div>
+              <div className="fieldRow">
+                <label>Contact</label>
+                <input
+                  type="text"
+                  value={database.brand.contact.person}
+                  onChange={(event) => updateContactField('person', event.target.value)}
+                />
+              </div>
+              <div className="fieldRow">
+                <label>Phone</label>
+                <input
+                  type="text"
+                  value={database.brand.contact.phone}
+                  onChange={(event) => updateContactField('phone', event.target.value)}
+                />
+              </div>
+              <div className="fieldRow">
+                <label>Address</label>
+                <input
+                  type="text"
+                  value={database.brand.contact.address}
+                  onChange={(event) => updateContactField('address', event.target.value)}
+                />
+              </div>
             </div>
-            <div className="fieldRow">
-              <label>Name</label>
-              <input
-                type="text"
-                value={database.brand.name}
-                onChange={(event) => updateBrandField('name', event.target.value)}
-              />
+
+            <div className="sectionBlock">
+              <div className="sectionHeader">Categories</div>
+              <div className="categoryList">
+                {database.categories.map((category) => {
+                  const isSelected = category.id === selectedCategoryId;
+                  return (
+                    <div
+                      key={category.id}
+                      className={`categoryItem ${isSelected ? 'selected' : ''}`}
+                      onClick={() => selectCategory(category.id)}
+                    >
+                      <div className="categoryLabel">{category.title || 'Untitled Category'}</div>
+                      <div className="categoryControls">
+                        <button type="button" onClick={(event) => { event.stopPropagation(); moveCategory(category.id, -1); }}>
+                          ↑
+                        </button>
+                        <button type="button" onClick={(event) => { event.stopPropagation(); moveCategory(category.id, 1); }}>
+                          ↓
+                        </button>
+                        <button type="button" onClick={(event) => { event.stopPropagation(); deleteCategory(category.id); }}>
+                          ✕
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <button className="primaryButton" type="button" onClick={addCategory}>
+                + Add Category
+              </button>
             </div>
-            <div className="fieldRow">
-              <label>Tagline</label>
-              <input
-                type="text"
-                value={database.brand.tagline}
-                onChange={(event) => updateBrandField('tagline', event.target.value)}
-              />
-            </div>
-            <div className="fieldRow">
-              <label>Contact</label>
-              <input
-                type="text"
-                value={database.brand.contact.person}
-                onChange={(event) => updateContactField('person', event.target.value)}
-              />
-            </div>
-            <div className="fieldRow">
-              <label>Phone</label>
-              <input
-                type="text"
-                value={database.brand.contact.phone}
-                onChange={(event) => updateContactField('phone', event.target.value)}
-              />
-            </div>
-            <div className="fieldRow">
-              <label>Address</label>
-              <input
-                type="text"
-                value={database.brand.contact.address}
-                onChange={(event) => updateContactField('address', event.target.value)}
-              />
-            </div>
-          </div>
+          </>
         )}
 
         {selectedCategoryId === 'timings' && (
@@ -930,7 +962,7 @@ const renderPriceInputs = (service: Service) => {
           </div>
         )}
 
-        {selectedCategoryId !== 'brand' && selectedCategoryId !== 'timings' && selectedCategoryId !== 'bookings' && selectedCategoryId !== 'analytics' && (
+        {selectedCategoryId !== 'website' && selectedCategoryId !== 'timings' && selectedCategoryId !== 'bookings' && selectedCategoryId !== 'analytics' && (
         <div className="sectionBlock">
           <div className="sectionHeader">
             {selectedCategory ? selectedCategory.title : 'Select a Category'}
@@ -964,12 +996,6 @@ const renderPriceInputs = (service: Service) => {
                 </label>
               </div>
               <div className="buttonGroup">
-                <button type="button" onClick={() => moveCategory(selectedCategory.id, -1)}>
-                  Move Up
-                </button>
-                <button type="button" onClick={() => moveCategory(selectedCategory.id, 1)}>
-                  Move Down
-                </button>
                 <button type="button" onClick={() => deleteCategory(selectedCategory.id)}>
                   Delete Category
                 </button>
