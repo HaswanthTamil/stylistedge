@@ -289,14 +289,14 @@ export default function HomePage() {
           {/* Nav links */}
           <div className="hidden md:flex items-center gap-4 text-xs uppercase tracking-wider font-medium">
             <a
-              href="/menu"
+              href="/services"
               className={`transition-all duration-500 rounded-full px-4 py-2 text-xs uppercase tracking-wider font-medium ${
                 scrolled
                   ? 'bg-transparent border-transparent text-primary hover:text-accent shadow-none'
                   : 'bg-white/95 backdrop-blur-sm shadow-sm border border-white/20 text-primary hover:text-accent'
               }`}
             >
-              Menu
+              Services
             </a>
             <a
               href="#signature"
@@ -501,7 +501,7 @@ export default function HomePage() {
               href="/menu"
               className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white text-sm tracking-widest uppercase font-semibold rounded shadow-lg hover:bg-gray-800 hover:-translate-y-1 transition-all duration-300"
             >
-              View Full Menu
+              View All Services
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -708,7 +708,7 @@ export default function HomePage() {
                   href="#services"
                   className="inline-block px-8 py-3.5 bg-primary hover:bg-accent text-white font-medium text-xs tracking-widest uppercase rounded shadow hover:shadow-lg transition-all duration-300"
                 >
-                  Explore Our Menu
+                  Explore Our Services
                 </a>
               </div>
             </div>
@@ -803,7 +803,7 @@ export default function HomePage() {
 
           {/* Quick navigations */}
           <div className="space-y-4 text-sm">
-            <h4 className="font-serif-luxury text-lg font-medium text-accent">Menu</h4>
+            <h4 className="font-serif-luxury text-lg font-medium text-accent">Services</h4>
             <div className="grid grid-cols-2 gap-2 text-xs text-white/75 font-light">
               <a href="#services" className="hover:text-accent hover:underline">Services Catalogue</a>
               <a href="#signature" className="hover:text-accent hover:underline">Signature Deals</a>
